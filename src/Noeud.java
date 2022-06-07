@@ -40,6 +40,12 @@ public class Noeud {
         this.adj.add(a);
     }
 
+    /////////////////////////
+    //
+    // toString / toGraphViz
+    //
+    /////////////////////////
+
     /**
      * le toString des Noeuds
      * @return nomDuNoeud -> list des Arcs

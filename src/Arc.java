@@ -16,6 +16,12 @@ public class Arc {
         this.cout = c;
     }
 
+    /////////////////////////
+    //
+    // toString / toGraphViz
+    //
+    /////////////////////////
+
     /**
      * Methode toString de arc
      * @return dest(valeur)

@@ -110,6 +110,12 @@ public class GrapheListe implements Graphe {
         this.ensNoeuds = newTab;
     }
 
+    /////////////////////////
+    //
+    // toString / toGraphViz
+    //
+    /////////////////////////
+
     /**
      * toString de graphliste
      * @return la liste des noeuds et de leurs Arcs
@@ -149,6 +155,28 @@ public class GrapheListe implements Graphe {
         fich.newLine();
         fich.write(chaine);
         fich.close();
+    }
+
+    /////////////////////////
+    //
+    // GETTER
+    //
+    /////////////////////////
+
+    /**
+     * getter pour la liste de noeuds
+     * @return la liste de noeuds
+     */
+    public List<Noeud> getEnsNoeuds() {
+        return ensNoeuds;
+    }
+
+    /**
+     * getter pour la liste des noms des noeuds
+     * @return la liste des noms des noeuds
+     */
+    public List<String> getEnsNom() {
+        return ensNom;
     }
 }
 

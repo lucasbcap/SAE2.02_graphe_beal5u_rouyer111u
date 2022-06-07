@@ -15,6 +15,7 @@ public class main {
 
         System.out.println(grapheListe.toGraphViz());
 
+
         grapheListe.genererGraphe("resultat.txt");
     }
 }
