@@ -16,6 +16,22 @@ public class Arc {
         this.cout = c;
     }
 
+    /**
+     * Methode toString de arc
+     * @return dest(valeur)
+     */
+    public String toString(){
+        return this.dest+"("+(int)this.cout+")";
+    }
+
+    /**
+     * Methode toGraphviz de arc
+     * @return dest(valeur)
+     */
+    public String toGraphViz(){
+        return this.dest+" [label = "+(int)this.cout+"]";
+    }
+
 
     /////////////////////////
     //

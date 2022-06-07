@@ -61,6 +61,7 @@ public class GrapheListe implements Graphe {
      * @param cout        valeur de l arc
      */
     public void ajouterArc(String depart, String destination, double cout) {
+        this.trierList();
         if (this.ensNom.contains(depart)) {
             boolean suivant = false;
             int i = 0;
@@ -83,7 +84,56 @@ public class GrapheListe implements Graphe {
         }
     }
 
+    /**
+     * permet de trier la liste de noeud dans l ordre alphabetique
+     * donc A B C D E ...
+     */
+    public void trierList(){
+        ArrayList<Noeud> newTab = new ArrayList<Noeud>();
+        int lenght = this.ensNoeuds.size();
+        for(int j =0 ;j<lenght;j++) {
+            String min = this.ensNoeuds.get(0).getNom();
+            int index = 0;
+            for (int i = 0; i < this.ensNoeuds.size(); i++) {
+                if (min.compareTo(this.ensNoeuds.get(i).getNom()) > 0) {
+                    min = this.ensNoeuds.get(i).getNom();
+                    index = i;
+                }
+            }
+            newTab.add(this.ensNoeuds.get(index));
+            this.ensNoeuds.remove(index);
+        }
+        this.ensNoeuds = newTab;
+    }
 
+    /**
+     * toString de graphliste
+     * @return la liste des noeuds et de leurs Arcs
+     */
+    public String toString(){
+        String chaine = "";
+        for(int i = 0; i<this.ensNoeuds.size();i++){
+            chaine += this.ensNoeuds.get(i).toString()+"\n";
+        }
+        return chaine;
+    }
+
+    /**
+     * toGraphViz de graphliste
+     * @return la liste des noeuds et de leurs Arcs
+     */
+    public String toGraphViz(){
+        String chaine = "digraph{\n";
+        for(int i = 0; i<this.ensNoeuds.size();i++){
+            chaine += this.ensNoeuds.get(i).toGraphViz();
+        }
+        chaine+="}";
+        return chaine;
+    }
+
+    public void genererGraphe(){
+
+    }
 
 }
 

@@ -10,5 +10,7 @@ public class main {
         grapheListe.ajouterArc("D","B",23);
         grapheListe.ajouterArc("D","C",10);
         grapheListe.ajouterArc("E","D",43);
+
+        System.out.println(grapheListe.toGraphViz());
     }
 }

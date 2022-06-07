@@ -40,6 +40,33 @@ public class Noeud {
         this.adj.add(a);
     }
 
+    /**
+     * le toString des Noeuds
+     * @return nomDuNoeud -> list des Arcs
+     */
+    public String toString(){
+        String chaine = this.nom+" -> ";
+
+        for(int i =0 ; i<this.adj.size();i++){
+            chaine += this.adj.get(i).toString()+" ";
+        }
+        return chaine;
+    }
+
+    /**
+     * le toString des Noeuds
+     * @return nomDuNoeud -> list des Arcs
+     */
+    public String toGraphViz(){
+        String chaine ="";
+
+        for(int i =0 ; i<this.adj.size();i++){
+            chaine += this.nom+" -> ";
+            chaine += this.adj.get(i).toGraphViz()+"\n";
+        }
+        return chaine;
+    }
+
     /////////////////////////
     //
     // GETTER
