@@ -45,7 +45,9 @@ public class GrapheListe implements Graphe {
     @Override
     public List<String> listeNoeuds() {
         for (int i = 0; i < this.ensNoeuds.size(); i++) {
-            this.ensNom.add(this.ensNoeuds.get(i).getNom());
+            if (!this.ensNom.contains(this.ensNoeuds.get(i).getNom())) {
+                this.ensNom.add(this.ensNoeuds.get(i).getNom());
+            }
         }
         return this.ensNom;
     }

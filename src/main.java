@@ -8,14 +8,21 @@ public class main {
         grapheListe.ajouterArc("A","B",12);
         grapheListe.ajouterArc("A","D",87);
         grapheListe.ajouterArc("C","A",19);
-        grapheListe.ajouterArc("B","E",11);
         grapheListe.ajouterArc("D","B",23);
         grapheListe.ajouterArc("D","C",10);
         grapheListe.ajouterArc("E","D",43);
+        grapheListe.trierList();
 
-        System.out.println(grapheListe.toGraphViz());
 
 
-        grapheListe.genererGraphe("resultat.txt");
+
+        BellmanFord bf = new BellmanFord();
+        Valeur v = bf.resoudre(grapheListe,"E");
+
+
+        System.out.println(v);
+
+        System.out.println("FIN");
+
     }
 }
