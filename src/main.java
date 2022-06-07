@@ -1,6 +1,8 @@
+import java.io.IOException;
+
 public class main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         GrapheListe grapheListe = new GrapheListe();
 
         grapheListe.ajouterArc("A","B",12);
@@ -12,5 +14,7 @@ public class main {
         grapheListe.ajouterArc("E","D",43);
 
         System.out.println(grapheListe.toGraphViz());
+
+        grapheListe.genererGraphe("resultat.txt");
     }
 }

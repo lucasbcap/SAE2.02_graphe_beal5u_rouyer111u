@@ -1,3 +1,7 @@
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,10 +135,21 @@ public class GrapheListe implements Graphe {
         return chaine;
     }
 
-    public void genererGraphe(){
-
+    public void genererGraphe(String nom) throws IOException {
+        BufferedWriter fich = new BufferedWriter(new FileWriter("Graphe/"+nom));
+        String chaine = "digraph{\n";
+        fich.write(chaine);
+        fich.newLine();
+        for(int i = 0; i<this.ensNoeuds.size();i++){
+            chaine = this.ensNoeuds.get(i).toGraphViz();
+            fich.write(chaine);
+            fich.newLine();
+        }
+        chaine="}";
+        fich.newLine();
+        fich.write(chaine);
+        fich.close();
     }
-
 }
 
 
