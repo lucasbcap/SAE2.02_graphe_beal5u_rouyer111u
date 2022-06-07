@@ -71,16 +71,19 @@ public class GrapheListe implements Graphe {
                 i++;
             }
             this.ensNoeuds.get(i - 1).ajouterArc(destination, cout);
-            if (!this.ensNom.contains(destination)) {
-                this.ensNom.add(destination);
-            }
         } else {
             this.ensNoeuds.add(new Noeud(depart));
-            this.ensNoeuds.get(this.ensNoeuds.size()).ajouterArc(destination, cout);
+            this.ensNoeuds.get(this.ensNoeuds.size()-1).ajouterArc(destination, cout);
             this.ensNom.add(depart);
+        }
+
+        if (!this.ensNom.contains(destination)) {
+            this.ensNoeuds.add(new Noeud(destination));
             this.ensNom.add(destination);
         }
     }
+
+
 
 }
 
