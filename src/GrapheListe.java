@@ -1,7 +1,5 @@
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +14,26 @@ public class GrapheListe implements Graphe {
     public GrapheListe() {
         this.ensNom = new ArrayList<String>();
         this.ensNoeuds = new ArrayList<Noeud>();
+    }
+
+    public GrapheListe (String nomFichier) throws IOException{
+        BufferedReader bf = new BufferedReader(new FileReader(nomFichier));
+        GrapheListe gl = new GrapheListe();
+        String line = bf.readLine();
+        String depart;
+        String arrivee;
+        int cout;
+        while (line != null){
+            String[] tabLine = line.split(" ");
+            depart = tabLine[0];
+            arrivee = tabLine[1];
+            cout = Integer.parseInt(tabLine[2]);
+            gl.ajouterArc(depart, arrivee, cout);
+            line = bf.readLine();
+
+        }
+
+        bf.close();
     }
 
 
