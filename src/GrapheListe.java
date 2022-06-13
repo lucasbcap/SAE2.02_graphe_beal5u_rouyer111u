@@ -115,6 +115,14 @@ public class GrapheListe implements Graphe {
     }
 
     /**
+     * Methode pour ajouter un noeud
+     * @param nom le nom du noeud
+     */
+    public void ajouterNoeud(String nom){
+        this.ensNoeuds.add(new Noeud(nom));
+    }
+
+    /**
      * permet de trier la liste de noeud dans l ordre alphabetique
      * donc A B C D E ...
      */

@@ -41,14 +41,25 @@ public class GenererGraphe {
         for (int i = 0; i < nbNoeuds; i++) {
             n = new Noeud(Integer.toString(i));
             gl.listeNoeuds().add(n.getNom());
+            gl.ajouterNoeud(Integer.toString(i));
         }
 
         int nbArc = alea(nbNoeuds) + nbNoeuds;
+        int depart = alea(nbNoeuds);
+        int arrivee = alea(nbNoeuds);
 
         for (int i = 0; i < nbArc; i++) {
-            gl.ajouterArc(Integer.toString(alea(nbNoeuds)), Integer.toString(alea(nbNoeuds)), alea(nbNoeuds));
+            while (this.depart.compareTo(Integer.toString(depart)) ==0 || this.arrivee.compareTo(Integer.toString(arrivee)) ==0) {
+                depart = alea(nbNoeuds);
+                arrivee = alea(nbNoeuds);
+            }
+            gl.ajouterArc(Integer.toString(depart), Integer.toString(arrivee), alea(nbNoeuds));
+            depart = alea(nbNoeuds);
+            arrivee = alea(nbNoeuds);
+
         }
         return gl;
     }
+
 
 }
