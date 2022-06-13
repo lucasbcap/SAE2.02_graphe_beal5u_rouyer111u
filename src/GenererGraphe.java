@@ -49,7 +49,7 @@ public class GenererGraphe {
         int arrivee = alea(nbNoeuds);
 
         for (int i = 0; i < nbArc; i++) {
-            while (this.depart.compareTo(Integer.toString(depart)) ==0 || this.arrivee.compareTo(Integer.toString(arrivee)) ==0) {
+            while (this.depart.compareTo(Integer.toString(arrivee)) ==0 || this.arrivee.compareTo(Integer.toString(depart)) ==0) {
                 depart = alea(nbNoeuds);
                 arrivee = alea(nbNoeuds);
             }
