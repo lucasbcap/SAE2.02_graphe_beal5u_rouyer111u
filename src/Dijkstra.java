@@ -1,21 +1,45 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Dijkstra {
 
-    private Graphe g;
-    private String a;
+    private ArrayList<Double> q;
+
+    public Dijkstra(){
+        q = new ArrayList<>();
+    }
+
+    public Valeur resoudre(Graphe g, String depart){
+
+        Valeur v = initialisation(g, depart);
+
+        while (!q.isEmpty()){
+            for (int i = 0; i<g.listeNoeuds().size(); i++ ){
+                int d;
+            }
+        }
+    }
 
     /**
-     * Constructeur de l'algo de Dijkstra
-     * @param graphe un graphe
-     * @param depart le sommet de depart
+     * Permet d initialiser les sommet
+     * @param g graphe fournit
+     * @param depart Sommet de depart
+     * @return la valeur d initialisation
      */
-    public Dijkstra( Graphe graphe, String depart){
-        this.g = graphe;
-        this.a = depart;
+    public Valeur initialisation(Graphe g, String depart) {
+        Valeur v = new Valeur();
 
-        ArrayList<Integer> q = new ArrayList<>();
-        for
+        List<String> listeNoeuds = g.listeNoeuds();
+        for (int i = 0; i < listeNoeuds.size(); i++) {
+            if (listeNoeuds.get(i).compareTo(depart) == 0) {
+                v.setValeur(listeNoeuds.get(i), 0);
+
+            } else {
+                v.setValeur(listeNoeuds.get(i), Double.MAX_VALUE);
+            }
+            q.add(i, v.getValeur(listeNoeuds.get(i)));
+        }
+        return v;
     }
 
 
