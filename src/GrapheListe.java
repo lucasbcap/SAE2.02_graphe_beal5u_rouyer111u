@@ -17,18 +17,19 @@ public class GrapheListe implements Graphe {
     }
 
     public GrapheListe (String nomFichier) throws IOException{
+        this.ensNom = new ArrayList<String>();
+        this.ensNoeuds = new ArrayList<Noeud>();
         BufferedReader bf = new BufferedReader(new FileReader(nomFichier));
-        GrapheListe gl = new GrapheListe();
         String line = bf.readLine();
         String depart;
         String arrivee;
         int cout;
         while (line != null){
-            String[] tabLine = line.split(" ");
+            String[] tabLine = line.split("\t");
             depart = tabLine[0];
             arrivee = tabLine[1];
             cout = Integer.parseInt(tabLine[2]);
-            gl.ajouterArc(depart, arrivee, cout);
+            this.ajouterArc(depart, arrivee, cout);
             line = bf.readLine();
 
         }

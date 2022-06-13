@@ -3,18 +3,27 @@ import java.util.List;
 
 public class BellmanFord {
 
+
+    /**
+     * Constructeur vide
+     */
     public BellmanFord() {
     }
 
+    /**
+     * Methode des points fixes pour résoudre un graphe
+     * @param g graphe a resoudre
+     * @param depart sommet de depart
+     * @return les valeurs minimal pour chaque sommet ainsi que son parent
+     */
     public Valeur resoudre(Graphe g, String depart) {
-
+        //on initialise comme vue en cour
         Valeur v = this.initialisation(g, depart);
 
-        System.out.println(this.listAntecedentSommet(g, "D"));
 
         boolean finis = false;
         int iteration = 0;
-
+        // pour chaque sommet
         while (!finis && iteration < g.listeNoeuds().size()) {
             // creation des AL(X) ancienne valeur
             //v.getValeur(g.listeNoeuds().get(X)) = L(X)
@@ -28,7 +37,7 @@ public class BellmanFord {
             for (int sommet = 0; sommet < g.listeNoeuds().size(); sommet++) {
                 ArrayList<String> listParents = this.listAntecedentSommet(g, g.listeNoeuds().get(sommet));
                 if(listParents.size()!=0) {
-                    int min = (int) v.getValeur(listParents.get(0)) + this.valeurArc(v, g, g.listeNoeuds().get(sommet), listParents.get(0));
+                    int min = (int)v.getValeur(g.listeNoeuds().get(sommet));
                     if(min<0){
                         min = Integer.MAX_VALUE;
                     }
@@ -44,8 +53,10 @@ public class BellmanFord {
                             }
                         }
                     }
-                    v.setValeur(g.listeNoeuds().get(sommet), min);
-                    v.setParent(g.listeNoeuds().get(sommet), listParents.get(placeP));
+                    if(min !=(int)v.getValeur(g.listeNoeuds().get(sommet))) {
+                        v.setValeur(g.listeNoeuds().get(sommet), min);
+                        v.setParent(g.listeNoeuds().get(sommet), listParents.get(placeP));
+                    }
                 }
             }
 
@@ -68,7 +79,12 @@ public class BellmanFord {
         return v;
     }
 
-
+    /**
+     * Permet d initialiser les sommet
+     * @param g graphe fournit
+     * @param depart Sommet de depart
+     * @return la valeur d initialisation
+     */
     public Valeur initialisation(Graphe g, String depart) {
         Valeur v = new Valeur();
 
@@ -84,7 +100,12 @@ public class BellmanFord {
         return v;
     }
 
-
+    /**
+     * renvoie la liste des antecedent d un sommet donne
+     * @param g Graphe fournit
+     * @param sommet sommet sur lequel on veut les  antecedents
+     * @return la liste des antecedent de sommet
+     */
     public ArrayList<String> listAntecedentSommet(Graphe g, String sommet) {
         ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < g.listeNoeuds().size(); i++) {
@@ -104,6 +125,14 @@ public class BellmanFord {
         return list;
     }
 
+    /**
+     * permet de renvoyer la valeur D(x,y)
+     * @param v valeur fournit
+     * @param g graphe fournit
+     * @param arriver sommet d arriver
+     * @param depart sommet de depart
+     * @return la valeur de l arc
+     */
     public int valeurArc(Valeur v , Graphe g,String arriver,String depart){
 
         List<Arc> listArcs=  g.suivants(depart);
