@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class BellmanFord {
+public class BellmanFord implements Algorithme {
 
 
     /**

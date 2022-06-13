@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Classe fournie, permet de stocker des valeurs associées au noeud et des parents
@@ -86,6 +83,28 @@ public class Valeur {
         }
         return res;
 
+    }
+
+    /**
+     * fonction qui calcule le chemin minimale a partir d un sommet
+     * @param destination chemin de fin
+     * @return la liste reliant le depart et la destination
+     */
+    public List<String> calculerChemin(String destination){
+        ArrayList<String> resultat = new ArrayList<String>();
+
+        boolean trouver = false;
+        while (!trouver){
+            resultat.add(destination);
+            if(this.getParent(destination)!=null){
+                destination = this.getParent(destination);
+            }
+            else{
+                trouver = true;
+            }
+        }
+        Collections.reverse(resultat);
+        return resultat;
     }
 
 }

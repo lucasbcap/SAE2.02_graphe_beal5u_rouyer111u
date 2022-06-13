@@ -53,6 +53,11 @@ public class GrapheListe implements Graphe {
         return this.ensNom;
     }
 
+    public Valeur resoudre(Algorithme algo,String depart){
+        Valeur v = algo.resoudre(this,depart);
+        return v;
+    }
+
     /**
      * Methode permettant de connaitre les acrs suivant un noeud
      *

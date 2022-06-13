@@ -1,13 +1,15 @@
 import java.io.IOException;
 
-public class main {
+public class MainDijkstra {
 
     public static void main(String[] args) throws IOException {
+
         GrapheListe grapheListe = new GrapheListe("Graphe/GrapheExemple1.txt");
 
-        BellmanFord bf = new BellmanFord();
-        Valeur v = bf.resoudre(grapheListe,"A");
+
+        Valeur v = grapheListe.resoudre(new Dijkstra(),"A");
 
         System.out.println(v);
+
     }
 }
