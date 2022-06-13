@@ -19,7 +19,6 @@ public class BellmanFord implements Algorithme {
     public Valeur resoudre(Graphe g, String depart) {
         //on initialise comme vue en cour
         Valeur v = this.initialisation(g, depart);
-        System.out.println(v);
 
         boolean finis = false;
         int iteration = 0;
@@ -75,7 +74,6 @@ public class BellmanFord implements Algorithme {
                 finis = true;
             }
             iteration++;
-            System.out.println(v);
         }
         return v;
     }
