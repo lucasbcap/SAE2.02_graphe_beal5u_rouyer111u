@@ -43,7 +43,7 @@ public class Dijkstra implements Algorithme{
 
 
         Valeur v = initialisation(g, depart);
-
+        System.out.println(v);
         while (!q.isEmpty()){
             int min = (int)v.getValeur(q.get(0));
             int index = 0;
@@ -65,6 +65,7 @@ public class Dijkstra implements Algorithme{
                     }
                 }
             }
+            System.out.println(v);
         }
         return v;
     }
