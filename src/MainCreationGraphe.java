@@ -9,9 +9,9 @@ public class MainCreationGraphe {
 
         BufferedWriter bw = new BufferedWriter(new FileWriter("resultats/BellmanFord.txt"));
 
-        for(int i=10 ; i < 500;i++){
+        for(int i=10 ; i < 0;i++){
 
-            GenererGraphe gg = new GenererGraphe(50, "0", "4");
+            GenererGraphe gg = new GenererGraphe(i, "0", "4");
             GrapheListe gl = gg.creerGraphe();
             BellmanFord bf = new BellmanFord();
             long debut = System.currentTimeMillis();
@@ -19,15 +19,17 @@ public class MainCreationGraphe {
             long fin = System.currentTimeMillis();
             bw.write (Double.toString((fin-debut)/1000.0));
             bw.newLine();
+            System.out.println(i+"% graphe : "+i);
         }
+        System.out.println("FIN BellmanFord");
         bw.close();
 
 
         BufferedWriter bw2 = new BufferedWriter(new FileWriter("resultats/Dijkstra.txt"));
 
-        for(int i=10 ; i < 500;i++){
+        for(int i=0 ; i < 1;i++){
 
-            GenererGraphe gg = new GenererGraphe(50, "0", "4");
+            GenererGraphe gg = new GenererGraphe(10000, "0", "4");
             GrapheListe gl = gg.creerGraphe();
             Dijkstra bf = new Dijkstra();
             long debut = System.currentTimeMillis();
@@ -35,7 +37,9 @@ public class MainCreationGraphe {
             long fin = System.currentTimeMillis();
             bw2.write (Double.toString((fin-debut)/1000.0));
             bw2.newLine();
+            System.out.println(i/10.0+"% graphe : "+i);
         }
+        System.out.println("FIN Dijkstra");
         bw2.close();
 
     }

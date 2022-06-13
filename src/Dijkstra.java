@@ -58,7 +58,7 @@ public class Dijkstra implements Algorithme{
             if(g.suivants(u)!=null) {
                 for (int i = 0; i < g.suivants(u).size(); i++) {
                     int d = (int) g.suivants(u).get(i).getCout() + (int) v.getValeur(u);
-                    if (d < (int) (v.getValeur(g.suivants(u).get(i).getDest()))) {
+                    if (d < (int) (v.getValeur(g.suivants(u).get(i).getDest())) && d>0) {
                         v.setValeur(g.suivants(u).get(i).getDest(), d);
                         v.setParent(g.suivants(u).get(i).getDest(), u);
                     }

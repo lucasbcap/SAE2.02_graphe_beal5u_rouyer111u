@@ -63,6 +63,28 @@ public class Labyrinthe {
         return res;
     }
 
+    public Graphe genererGraphe (){
+        GrapheListe graphe =  new GrapheListe();
+        for(int ligne = 0 ; ligne <this.getLength();ligne++){
+            for(int colonne = 0 ; colonne <this.getLengthY();colonne++) {
+                if (!this.getMur(ligne, colonne)) {
+                    int[] haut = this.deplacerPerso(ligne, colonne, HAUT);
+                    int[] bas = this.deplacerPerso(ligne, colonne, BAS);
+                    int[] droite = this.deplacerPerso(ligne, colonne, DROITE);
+                    int[] gauche = this.deplacerPerso(ligne, colonne, GAUCHE);
+
+                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+haut[0]+","+haut[1]+")>",1);
+                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+bas[0]+","+bas[1]+")>",1);
+                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+droite[0]+","+droite[1]+")>",1);
+                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+gauche[0]+","+gauche[1]+")>",1);
+
+
+                }
+            }
+        }
+        return  graphe;
+    }
+
     /**
      * charge le labyrinthe
      *
