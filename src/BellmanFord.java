@@ -61,18 +61,15 @@ public class BellmanFord implements Algorithme {
 
 
             int i = 0;
-            boolean trouverPointfixe = true;
-            while (i < pointfixe.size() && trouverPointfixe) {
+            finis = true;
+            while (i < pointfixe.size() && finis) {
                 if (v.getValeur(g.listeNoeuds().get(i)) != pointfixe.get(i)) {
 
-                    trouverPointfixe = false;
+                    finis = false;
                 }
                 i++;
             }
 
-            if (trouverPointfixe) {
-                finis = true;
-            }
             iteration++;
         }
         return v;
