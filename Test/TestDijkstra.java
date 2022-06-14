@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-public class TestBellmanFord {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class TestDijkstra {
 
     @Test
     public void testAlgo(){
@@ -15,7 +16,7 @@ public class TestBellmanFord {
         graphe.ajouterArc("D","B",23);
         graphe.ajouterArc("B","E",11);
         graphe.ajouterArc("E","D",43);
-        BellmanFord bf = new BellmanFord();
+        Dijkstra bf = new Dijkstra();
         Valeur v = bf.resoudre(graphe,"A");
 
         assertEquals( v.getValeur("A"), 0 ," la valeur en A est 0 ") ;
@@ -30,9 +31,5 @@ public class TestBellmanFord {
         assertEquals( v.getParent("D"), "E" ," le parent en D est E ") ;
         assertEquals( v.getParent("E"), "B" ," le parent en E est B ") ;
     }
-
-
-
-
 
 }

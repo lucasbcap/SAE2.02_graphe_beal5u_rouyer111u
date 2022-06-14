@@ -63,6 +63,10 @@ public class Labyrinthe {
         return res;
     }
 
+    /**
+     * Generer un graphe a partir d un labyrinthe
+     * @return un graphe generer
+     */
     public Graphe genererGraphe (){
         GrapheListe graphe =  new GrapheListe();
         for(int ligne = 0 ; ligne <this.getLength();ligne++){

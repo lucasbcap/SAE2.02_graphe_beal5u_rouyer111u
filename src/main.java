@@ -5,22 +5,25 @@ public class main {
     public static void main(String[] args) throws IOException {
 
 
-        String[] tabNomFichier = {"Graphe/Graphe1.txt","Graphe/Graphe11.txt","Graphe/Graphe21.txt",
-                "Graphe/Graphe31.txt","Graphe/Graphe51.txt","Graphe/Graphe101.txt"};
+        GrapheListe graphe = new GrapheListe();
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter("resultats/BellmanFord.txt"));
+        graphe.ajouterArc("A","B",12);
+        graphe.ajouterArc("C","A",19);
+        graphe.ajouterArc("D","C",10);
+        graphe.ajouterArc("A","D",87);
+        graphe.ajouterArc("D","B",23);
+        graphe.ajouterArc("B","E",11);
+        graphe.ajouterArc("E","D",43);
 
-        for(int i=0 ; i < tabNomFichier.length;i++){
+        System.out.println(graphe.toGraphViz());
 
-            GrapheListe grapheListe = new GrapheListe(tabNomFichier[i]);
-            BellmanFord bf = new BellmanFord();
-            long debut = System.currentTimeMillis();
-            Valeur v = bf.resoudre(grapheListe,"1");
-            long fin = System.currentTimeMillis();
-            bw.write (Double.toString((fin-debut)/1000.0));
-            bw.newLine();
-        }
-        bw.close();
+
+
+        //question 15
+        BellmanFord bf = new BellmanFord();
+        Valeur v = bf.resoudre(graphe,"A");
+
+        System.out.println(v);
 
     }
 }
