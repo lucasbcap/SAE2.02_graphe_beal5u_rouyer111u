@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -77,15 +78,156 @@ public class Labyrinthe {
                     int[] droite = this.deplacerPerso(ligne, colonne, DROITE);
                     int[] gauche = this.deplacerPerso(ligne, colonne, GAUCHE);
 
-                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+haut[0]+","+haut[1]+")>",1);
-                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+bas[0]+","+bas[1]+")>",1);
-                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+droite[0]+","+droite[1]+")>",1);
-                    graphe.ajouterArc("<("+ligne+","+colonne+")>","<("+gauche[0]+","+gauche[1]+")>",1);
-
+                    if(haut[0]!=ligne || haut[1]!=colonne) {
+                        graphe.ajouterArc("<(" + ligne + "," + colonne + ")>", "<(" + haut[0] + "," + haut[1] + ")>", 1);
+                    }
+                    if(bas[0]!=ligne || bas[1]!=colonne) {
+                        graphe.ajouterArc("<(" + ligne + "," + colonne + ")>", "<(" + bas[0] + "," + bas[1] + ")>", 1);
+                    }
+                    if(droite[0]!=ligne || droite[1]!=colonne) {
+                        graphe.ajouterArc("<(" + ligne + "," + colonne + ")>", "<(" + droite[0] + "," + droite[1] + ")>", 1);
+                    }
+                    if(gauche[0]!=ligne || gauche[1]!=colonne) {
+                        graphe.ajouterArc("<(" + ligne + "," + colonne + ")>", "<(" + gauche[0] + "," + gauche[1] + ")>", 1);
+                    }
 
                 }
             }
         }
+        return  graphe;
+    }
+
+    /**
+     * Generer un graphe a partir d un labyrinthe glace
+     * @return un graphe generer
+     */
+    public Graphe genererGrapheGlace (String depart){
+        GrapheListe graphe =  new GrapheListe();
+        String[] coord= depart.split(",");
+        int x =  Integer.parseInt(coord[0].substring(2)) ;
+        int y =  Integer.parseInt(coord[1].substring(0,1)) ;
+
+        boolean trouver = false;
+
+        ArrayList<int[]> sommetImportant = new ArrayList<>();
+        ArrayList<int[]> sommetPasser = new ArrayList<>();
+        sommetImportant.add(new int[]{x,y});
+        sommetPasser.add(new int[]{x,y});
+
+        while (!sommetImportant.isEmpty()){
+            ArrayList<int[]> haut = this.deplacerPersoGlace(sommetImportant.get(0)[0], sommetImportant.get(0)[1], HAUT);
+            ArrayList<int[]> bas = this.deplacerPersoGlace(sommetImportant.get(0)[0], sommetImportant.get(0)[1], BAS);
+            ArrayList<int[]> droite = this.deplacerPersoGlace(sommetImportant.get(0)[0], sommetImportant.get(0)[1], DROITE);
+            ArrayList<int[]> gauche = this.deplacerPersoGlace(sommetImportant.get(0)[0], sommetImportant.get(0)[1], GAUCHE);
+
+
+            if(haut.size()!=1) {
+                trouver = false;
+                for (int i = 1; i < haut.size(); i++) {
+                    if(i==1){
+                        graphe.ajouterArc("<(" + haut.get(i-1)[0] + "," + haut.get(i-1)[1] + ")>", "<(" + haut.get(i)[0] + "," + haut.get(i)[1] + ")>", 1);
+
+                    }
+                    else{
+                        graphe.ajouterArc("<(" + haut.get(i-1)[0] + "," + haut.get(i-1)[1] + ")>", "<(" + haut.get(i)[0] + "," + haut.get(i)[1] + ")>", 0);
+                    }
+                }
+
+                int i =0;
+                while(!trouver && i<sommetPasser.size()){
+                    if(haut.get(haut.size()-1)[0] == sommetPasser.get(i)[0] && haut.get(haut.size()-1)[1] == sommetPasser.get(i)[1]){
+                        trouver = true;
+                    }
+                    i++;
+                }
+
+                if(!trouver){
+                    sommetPasser.add(new int[]{haut.get(haut.size()-1)[0],haut.get(haut.size()-1)[1]});
+                    sommetImportant.add(new int[]{haut.get(haut.size()-1)[0],haut.get(haut.size()-1)[1]});
+                }
+            }
+
+
+
+            if(bas.size()!=1) {
+                trouver = false;
+                for (int i = 1; i < bas.size(); i++) {
+                    if(i==1){
+                        graphe.ajouterArc("<(" + bas.get(i-1)[0] + "," + bas.get(i-1)[1] + ")>", "<(" + bas.get(i)[0] + "," + bas.get(i)[1] + ")>", 1);
+                    }
+                    else{
+                        graphe.ajouterArc("<(" + bas.get(i-1)[0] + "," + bas.get(i-1)[1] + ")>", "<(" + bas.get(i)[0] + "," + bas.get(i)[1] + ")>", 0);
+                    }
+                }
+                int i =0;
+                while(!trouver && i<sommetPasser.size()){
+                    if(bas.get(bas.size()-1)[0] == sommetPasser.get(i)[0] && bas.get(bas.size()-1)[1] == sommetPasser.get(i)[1]){
+                        trouver = true;
+                    }
+                    i++;
+                }
+
+                if(!trouver){
+                    sommetPasser.add(new int[]{bas.get(bas.size()-1)[0],bas.get(bas.size()-1)[1]});
+                    sommetImportant.add(new int[]{bas.get(bas.size()-1)[0],bas.get(bas.size()-1)[1]});
+                }
+            }
+
+
+
+            if(droite.size()!=1) {
+                trouver = false;
+                for (int i = 1; i < droite.size(); i++) {
+                    if(i==1){
+                        graphe.ajouterArc("<(" + droite.get(i-1)[0] + "," + droite.get(i-1)[1] + ")>", "<(" + droite.get(i)[0] + "," + droite.get(i)[1] + ")>", 1);
+                    }
+                    else{
+                        graphe.ajouterArc("<(" + droite.get(i-1)[0] + "," + droite.get(i-1)[1] + ")>", "<(" + droite.get(i)[0] + "," + droite.get(i)[1] + ")>", 0);
+                    }
+                }
+                int i =0;
+                while(!trouver && i<sommetPasser.size()){
+                    if(droite.get(droite.size()-1)[0] == sommetPasser.get(i)[0] && droite.get(droite.size()-1)[1] == sommetPasser.get(i)[1]){
+                        trouver = true;
+                    }
+                    i++;
+                }
+
+                if(!trouver){
+                    sommetPasser.add(new int[]{droite.get(droite.size()-1)[0],droite.get(droite.size()-1)[1]});
+                    sommetImportant.add(new int[]{droite.get(droite.size()-1)[0],droite.get(droite.size()-1)[1]});
+                }
+            }
+
+
+            if(gauche.size()!=1) {
+                trouver = false;
+                for (int i = 1; i < gauche.size(); i++) {
+                    if(i==1){
+                        graphe.ajouterArc("<(" + gauche.get(i-1)[0] + "," + gauche.get(i-1)[1] + ")>", "<(" + gauche.get(i)[0] + "," + gauche.get(i)[1] + ")>", 1);
+                    }
+                    else{
+                        graphe.ajouterArc("<(" + gauche.get(i-1)[0] + "," + gauche.get(i-1)[1] + ")>", "<(" + gauche.get(i)[0] + "," + gauche.get(i)[1] + ")>", 0);
+                    }
+                }
+                int i =0;
+                while(!trouver && i<sommetPasser.size()){
+                    if(gauche.get(gauche.size()-1)[0] == sommetPasser.get(i)[0] && gauche.get(gauche.size()-1)[1] == sommetPasser.get(i)[1]){
+                        trouver = true;
+                    }
+                    i++;
+                }
+
+                if(!trouver){
+                    sommetPasser.add(new int[]{gauche.get(gauche.size()-1)[0],gauche.get(gauche.size()-1)[1]});
+                    sommetImportant.add(new int[]{gauche.get(gauche.size()-1)[0],gauche.get(gauche.size()-1)[1]});
+                }
+            }
+            sommetImportant.remove(0);
+
+        }
+
+
         return  graphe;
     }
 
@@ -166,6 +308,33 @@ public class Labyrinthe {
         return courante;
     }
 
+
+    /**
+     * deplace le personnage en fonction de l'action sur de la glace.
+     * gere la collision avec les murs
+     *
+     * @param action une des actions possibles
+     */
+    public ArrayList<int[]> deplacerPersoGlace(int i, int j, String action) {
+        // case courante
+        int[] courante = {i,j};
+        ArrayList<int[]> tab = new ArrayList<int[]>();
+
+        boolean fin = false;
+        // si c'est pas un mur, on effectue le deplacement
+        while(!fin) {
+            tab.add(new int[]{courante[0],courante[1]});
+            int[] suivante = getSuivant(courante[0], courante[1], action);
+            if (!this.murs[suivante[0]][suivante[1]]) {
+                courante[0] = suivante[0];
+                courante[1] = suivante[1];
+            }
+            else{
+                fin = true;
+            }
+        }
+        return tab;
+    }
 
     /**
      * jamais fini

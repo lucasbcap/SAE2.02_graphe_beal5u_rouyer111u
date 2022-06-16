@@ -8,8 +8,6 @@ public class MainLaby {
 
         GrapheListe gl = (GrapheListe) laby.genererGraphe();
 
-        System.out.println(gl.toGraphViz());
-
         Valeur v = gl.resoudre(new Dijkstra(),"<(1,1)>");
         System.out.println(v);
 
@@ -19,6 +17,11 @@ public class MainLaby {
         Valeur v2 = dj.resoudre(Glaby,"<(1,1)>");
         System.out.println("= ?");
         System.out.println(v2);
+
+        GrapheListe glg = (GrapheListe) laby.genererGrapheGlace("<(1,1)>");
+        System.out.println(glg.toGraphViz());
+
+
 
 
     }
