@@ -16,6 +16,11 @@ public class GrapheListe implements Graphe {
         this.ensNoeuds = new ArrayList<Noeud>();
     }
 
+    /**
+     * Permet de generer un Graphe a partir d un fichier
+     * @param nomFichier le fichier fournit
+     * @throws IOException
+     */
     public GrapheListe (String nomFichier) throws IOException{
         this.ensNom = new ArrayList<String>();
         this.ensNoeuds = new ArrayList<Noeud>();
@@ -53,6 +58,12 @@ public class GrapheListe implements Graphe {
         return this.ensNom;
     }
 
+    /**
+     * resoud un graphe en fonction d un algo donnee
+     * @param algo qui permet de resoudre le graphe
+     * @param depart le sommet de depart
+     * @return la solution de l algo
+     */
     public Valeur resoudre(Algorithme algo,String depart){
         Valeur v = algo.resoudre(this,depart);
         return v;

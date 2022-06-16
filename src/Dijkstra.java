@@ -39,6 +39,8 @@ public class Dijkstra implements Algorithme{
      * @return
      */
     public Valeur resoudre(Graphe g, String depart){
+
+        //On applique litteralement l algo fournit
         List<String> q = new ArrayList<String>(g.listeNoeuds()) ;
 
 
@@ -75,6 +77,7 @@ public class Dijkstra implements Algorithme{
      * @return la valeur d initialisation
      */
     public Valeur initialisation(Graphe g, String depart) {
+        // fixe les sommet a plus l infinis sauf le sommet de depart
         Valeur v = new Valeur();
 
         List<String> listeNoeuds = g.listeNoeuds();

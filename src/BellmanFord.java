@@ -25,6 +25,7 @@ public class BellmanFord implements Algorithme {
         // pour chaque sommet
         while (!finis && iteration < g.listeNoeuds().size()) {
             // creation des AL(X) ancienne valeur
+            // on sauvegarde les points fixes
             //v.getValeur(g.listeNoeuds().get(X)) = L(X)
             ArrayList<Integer> pointfixe = new ArrayList<>();
             for (int sommet = 0; sommet < g.listeNoeuds().size(); sommet++) {
@@ -33,6 +34,7 @@ public class BellmanFord implements Algorithme {
 
 
             // sommet = X
+            // this.valeurArc(v, g, g.listeNoeuds().get(sommet), listParents.get(parent)) = d(X,Y)
             for (int sommet = 0; sommet < g.listeNoeuds().size(); sommet++) {
                 ArrayList<String> listParents = this.listAntecedentSommet(g, g.listeNoeuds().get(sommet));
                 if(listParents.size()!=0) {
@@ -41,7 +43,7 @@ public class BellmanFord implements Algorithme {
                         min = Integer.MAX_VALUE;
                     }
                     int placeP = 0;
-
+                    // on calcule les valeurs des enfants
                     for (int parent = 0; parent < listParents.size(); parent++) {
 
                         int valeur = (int) v.getValeur(listParents.get(parent)) + this.valeurArc(v, g, g.listeNoeuds().get(sommet), listParents.get(parent));
@@ -59,7 +61,7 @@ public class BellmanFord implements Algorithme {
                 }
             }
 
-
+            // on compare les points fixes
             int i = 0;
             finis = true;
             while (i < pointfixe.size() && finis) {
@@ -82,8 +84,8 @@ public class BellmanFord implements Algorithme {
      * @return la valeur d initialisation
      */
     public Valeur initialisation(Graphe g, String depart) {
+        // fixe les sommet a plus l infinis sauf le sommet de depart
         Valeur v = new Valeur();
-
         List<String> listeNoeuds = g.listeNoeuds();
         for (int i = 0; i < listeNoeuds.size(); i++) {
             if (listeNoeuds.get(i).compareTo(depart) == 0) {

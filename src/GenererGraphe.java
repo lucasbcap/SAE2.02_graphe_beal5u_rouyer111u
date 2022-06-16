@@ -27,6 +27,7 @@ public class GenererGraphe {
      * @return le nombre choisi
      */
     public int alea(int fois) {
+        //choisit un nombre aleatoire
         Random r = new Random();
         return r.nextInt(fois);
     }
@@ -35,9 +36,11 @@ public class GenererGraphe {
      * Methode permetant de creer un Graphe
      */
     public GrapheListe creerGraphe() {
+        // on tire 2 sommets aleatoires et on cree un arc
         Noeud n;
         GrapheListe gl = new GrapheListe();
 
+        // on ajoute tout les noeuds
         for (int i = 0; i < nbNoeuds; i++) {
             n = new Noeud(Integer.toString(i));
             gl.listeNoeuds().add(n.getNom());
@@ -49,6 +52,7 @@ public class GenererGraphe {
         int arrivee = alea(nbNoeuds);
 
         for (int i = 0; i < nbArc; i++) {
+            // on regarde qu aucun arc arrive sur le depart et pars de l arriver
             while (this.depart.compareTo(Integer.toString(arrivee)) ==0 || this.arrivee.compareTo(Integer.toString(depart)) ==0) {
                 depart = alea(nbNoeuds);
                 arrivee = alea(nbNoeuds);

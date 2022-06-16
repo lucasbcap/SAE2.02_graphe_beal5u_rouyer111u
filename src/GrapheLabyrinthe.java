@@ -19,6 +19,8 @@ public class GrapheLabyrinthe implements Graphe{
      */
     @Override
     public List<String> listeNoeuds() {
+        //ajoute tout les noeuds
+        // ce sont toutes les cases vides / sans murs
         ArrayList<String> retour = new ArrayList<String>();
         for(int ligne = 0 ; ligne <this.laby.getLength();ligne++) {
             for (int colonne = 0; colonne < this.laby.getLengthY(); colonne++) {
@@ -37,6 +39,7 @@ public class GrapheLabyrinthe implements Graphe{
      */
     @Override
     public List<Arc> suivants(String n) {
+        //on regarde les suivants d un sommet et on cree un arc entre
         String[] coord= n.split(",");
         int x =  Integer.parseInt(coord[0].substring(2)) ;
         int y =  Integer.parseInt(coord[1].substring(0,1)) ;

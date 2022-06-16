@@ -69,15 +69,19 @@ public class Labyrinthe {
      * @return un graphe generer
      */
     public Graphe genererGraphe (){
+        // la logique est de cree les sommets sur des case vides
+        // voir si on le suivant est un mur si non on cree un arc de valeur 1
         GrapheListe graphe =  new GrapheListe();
         for(int ligne = 0 ; ligne <this.getLength();ligne++){
             for(int colonne = 0 ; colonne <this.getLengthY();colonne++) {
+                //on regarde chaque case si c est pas un mur
                 if (!this.getMur(ligne, colonne)) {
                     int[] haut = this.deplacerPerso(ligne, colonne, HAUT);
                     int[] bas = this.deplacerPerso(ligne, colonne, BAS);
                     int[] droite = this.deplacerPerso(ligne, colonne, DROITE);
                     int[] gauche = this.deplacerPerso(ligne, colonne, GAUCHE);
 
+                    //on regarde si il a bouger
                     if(haut[0]!=ligne || haut[1]!=colonne) {
                         graphe.ajouterArc("<(" + ligne + "," + colonne + ")>", "<(" + haut[0] + "," + haut[1] + ")>", 1);
                     }
@@ -102,6 +106,20 @@ public class Labyrinthe {
      * @return un graphe generer
      */
     public Graphe genererGrapheGlace (String depart){
+
+        /**
+         * Ici le principe est que on part d un depart on retourne la liste de toutes les cases
+         * jusqu a rencontrer un mur
+         * la dernier case avant le mur est un sommet Important, cela veut dire que a partir de se sommet
+         * on peut aller dans d autre direction et trouver d autre sommet important etc...
+         *
+         * Du coup on retire les sommets importants a chaque tour de boucle
+         * a la fin on a fait toutes les possibilitees possible
+         *
+         * desole du code tres tres sale
+         */
+
+
         GrapheListe graphe =  new GrapheListe();
         String[] coord= depart.split(",");
         int x =  Integer.parseInt(coord[0].substring(2)) ;
